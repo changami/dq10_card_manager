@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  remaining_hour: 1
+  own_player: MyString
+
+two:
+  name: MyString
+  remaining_hour: 1
+  own_player: MyString
