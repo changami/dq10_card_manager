@@ -9,3 +9,8 @@ two:
   name: MyString
   remaining_hour: 1
   own_player: MyString
+
+atlas:
+  name: アトラスのカード
+  remaining_hour: 628
+  own_player: ちゃんがみ
