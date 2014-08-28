@@ -2,13 +2,19 @@
 <html>
 <head>
   <title>DqCardManager</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <link href='http://fonts.googleapis.com/css?family=Varela' rel='stylesheet' type='text/css'>
 </head>
 <body class='<%= controller.controller_name %>'>
-
-<%= yield %>
-
+<div id="banner">
+  <%= @page_title || "DQ Card Manager" %>
+</div>
+<div id="columns">
+  <div id="main">
+    <%= yield %>
+  </div>
+</div>
 </body>
 </html>
