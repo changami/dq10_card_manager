@@ -8,7 +8,7 @@
   <thead>
   <tr>
     <th>カード名</th>
-    <th>残り時間(登録時点)[h]</th>
+    <th>残り時間</th>
     <th>所有者</th>
     <th colspan="3"></th>
   </tr>
@@ -16,9 +16,9 @@
 
   <tbody>
   <% @cards.each do |card| %>
-      <tr class="<%= cycle('list_line_odd', 'list_line_even') %>">
+      <tr class="<%= cycle('list_line_odd', 'list_line_even') %>" style="<%= card.display_style %>">
         <td><%= card.name %></td>
-        <td><%= card.remaining_hour %></td>
+        <td><%= card.display_remaining_hour %></td>
         <td><%= card.own_player %></td>
         <td class="list_actions"><%= link_to 'Show', card %></td>
         <td class="list_actions"><%= link_to 'Edit', edit_card_path(card) %></td>

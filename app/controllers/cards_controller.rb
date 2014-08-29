@@ -4,7 +4,7 @@ class CardsController < ApplicationController
   # GET /cards
   # GET /cards.json
   def index
-    @cards = Card.all
+    @cards = Card.sort_by_remaining_hour(Card.all)
   end
 
   # GET /cards/1
