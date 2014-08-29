@@ -4,7 +4,7 @@ class TeamsController < ApplicationController
   # GET /teams
   # GET /teams.json
   def index
-    @teams = Team.all
+    @teams = Team.order(:name)
   end
 
   # GET /teams/1
@@ -28,7 +28,7 @@ class TeamsController < ApplicationController
 
     respond_to do |format|
       if @team.save
-        format.html { redirect_to @team, notice: 'Team was successfully created.' }
+        format.html { redirect_to teams_url, notice: "#{@team.name} を登録しました" }
         format.json { render :show, status: :created, location: @team }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class TeamsController < ApplicationController
   def update
     respond_to do |format|
       if @team.update(team_params)
-        format.html { redirect_to @team, notice: 'Team was successfully updated.' }
+        format.html { redirect_to teams_url, notice: "#{@team.name} を更新しました" }
         format.json { render :show, status: :ok, location: @team }
       else
         format.html { render :edit }
@@ -56,7 +56,7 @@ class TeamsController < ApplicationController
   def destroy
     @team.destroy
     respond_to do |format|
-      format.html { redirect_to teams_url, notice: 'Team was successfully destroyed.' }
+      format.html { redirect_to teams_url, notice: "#{@team.name} を削除しました" }
       format.json { head :no_content }
     end
   end
@@ -69,6 +69,6 @@ class TeamsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def team_params
-      params.require(:team).permit(:name, :password_digest)
+      params.require(:team).permit(:name, :password, :password_confirmation)
     end
 end

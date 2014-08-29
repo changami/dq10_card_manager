@@ -1,3 +1,5 @@
+<div class="app_form">
+
 <%= form_for(@team) do |f| %>
   <% if @team.errors.any? %>
     <div id="error_explanation">
@@ -11,15 +13,26 @@
     </div>
   <% end %>
 
+  <fieldset>
+  <legend>チーム情報の入力</legend>
+
   <div class="field">
     <%= f.label :name %><br>
-    <%= f.text_field :name %>
+    <%= f.text_field :name, size: 40 %>
   </div>
   <div class="field">
-    <%= f.label :password_digest %><br>
-    <%= f.text_field :password_digest %>
+    <%= f.label :password, 'パスワード' %><br>
+    <%= f.password_field :password, size: 40 %>
+  </div>
+  <div class="field">
+    <%= f.label :password_confirmation, '確認' %><br>
+    <%= f.password_field :password_confirmation, size: 40 %>
   </div>
   <div class="actions">
     <%= f.submit %>
   </div>
+
+  </fieldset>
 <% end %>
+
+</div>
