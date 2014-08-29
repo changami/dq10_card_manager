@@ -2,6 +2,12 @@ require 'test_helper'
 
 class TeamsControllerTest < ActionController::TestCase
   setup do
+    @input_attributes = {
+        name: "TestTeam",
+        password: "private",
+        password_confirmation: "private"
+    }
+
     @team = teams(:one)
   end
 
@@ -18,10 +24,10 @@ class TeamsControllerTest < ActionController::TestCase
 
   test "should create team" do
     assert_difference('Team.count') do
-      post :create, team: { name: @team.name, password_digest: @team.password_digest }
+      post :create, team: @input_attributes
     end
 
-    assert_redirected_to team_path(assigns(:team))
+    assert_redirected_to teams_path
   end
 
   test "should show team" do
@@ -35,8 +41,8 @@ class TeamsControllerTest < ActionController::TestCase
   end
 
   test "should update team" do
-    patch :update, id: @team, team: { name: @team.name, password_digest: @team.password_digest }
-    assert_redirected_to team_path(assigns(:team))
+    patch :update, id: @team.to_param, team: @input_attributes
+    assert_redirected_to teams_path
   end
 
   test "should destroy team" do
