@@ -1,5 +1,6 @@
 class TeamsController < ApplicationController
   before_action :set_team, only: [:show, :edit, :update, :destroy]
+  skip_before_filter :authorize, only: [:new, :create]
 
   # GET /teams
   # GET /teams.json
@@ -30,6 +31,7 @@ class TeamsController < ApplicationController
       if @team.save
         format.html { redirect_to teams_url, notice: "#{@team.name} を登録しました" }
         format.json { render :show, status: :created, location: @team }
+        session[:team_id] = @team.id
       else
         format.html { render :new }
         format.json { render json: @team.errors, status: :unprocessable_entity }

@@ -16,6 +16,11 @@
     <%= yield %>
   </div>
 </div>
+
+<% if session[:team_id] %>
+  <%= button_to 'ログアウト', logout_path, method: :delete %>
+<% end %>
+
 <footer>
   <div>&copy; 2014 chan_gami</div>
 </footer>

@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  skip_before_filter :authorize, only: [:new, :create]
+
   def new
   end
 
@@ -8,12 +10,12 @@ class SessionsController < ApplicationController
       session[:team_id] = team.id
       redirect_to cards_url
     else
-      redirect_to login_url, alert: "無効なチーム / パスワードの組み合わせです"
+      redirect_to login_url, alert: "無効なチーム名 / パスワードの組み合わせです"
     end
   end
 
   def destroy
     session[:team_id] = nil
-    redirect_to login_url, alert: "ログアウト"
+    redirect_to login_url, alert: "ログアウトしました"
   end
 end
