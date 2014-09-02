@@ -1,0 +1,21 @@
+<% if notice %>
+    <p id="notice"><%= notice %></p>
+<% end %>
+
+<p>
+  <strong>カード名:</strong>
+  <%= @card.name %>
+</p>
+
+<p>
+  <strong>残り時間(登録時点)[h]:</strong>
+  <%= @card.remaining_hour %>
+</p>
+
+<p>
+  <strong>所有者:</strong>
+  <%= @card.own_player %>
+</p>
+
+<%= link_to 'Edit', edit_card_path(@card) %> |
+<%= link_to 'Back', cards_path %>

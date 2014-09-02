@@ -2,13 +2,31 @@
 <html>
 <head>
   <title>DqCardManager</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <link href='http://fonts.googleapis.com/css?family=Varela' rel='stylesheet' type='text/css'>
 </head>
-<body>
+<body class='<%= controller.controller_name %>'>
+<div id="banner">
+  <%= @page_title || "DQ Card Manager" %>
+</div>
+<div id="columns">
+  <div id="main">
+    <% if Team.find_by_id(session[:team_id]) %>
+      <div><%= Team.find_by_id(session[:team_id]).name %> でログイン中</div>
+    <% end %>
 
-<%= yield %>
+    <%= yield %>
+  </div>
+</div>
 
+<% if session[:team_id] %>
+  <%= button_to 'ログアウト', logout_path, method: :delete %>
+<% end %>
+
+<footer>
+  <div>&copy; 2014 chan_gami</div>
+</footer>
 </body>
 </html>
