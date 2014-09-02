@@ -1,0 +1,25 @@
+<%= form_for(@line_card) do |f| %>
+  <% if @line_card.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@line_card.errors.count, "error") %> prohibited this line_card from being saved:</h2>
+
+      <ul>
+      <% @line_card.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :card_id %><br>
+    <%= f.number_field :card_id %>
+  </div>
+  <div class="field">
+    <%= f.label :team_id %><br>
+    <%= f.number_field :team_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

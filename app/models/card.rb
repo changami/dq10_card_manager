@@ -2,6 +2,8 @@ class Card < ActiveRecord::Base
   validates :name, :remaining_hour, :own_player, presence: true
   validates :remaining_hour, numericality: {greater_than_or_equal_to: 1, less_than_or_equal_to: 720}
 
+  belongs_to :line_card
+
   def calc_remaining_hour_from_now
     # 更新時と残り時間から、現在からの残り時間を算出する（結果は四捨五入）
     {:updated_at => updated_at, :remaining_hour => remaining_hour}
