@@ -7,4 +7,15 @@ class ActiveSupport::TestCase
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
+  def login_as(team)
+    session[:team_id] = teams(team).id
+  end
+
+  def logout
+    session.delete :team_id
+  end
+
+  def setup
+    login_as :one if defined? session
+  end
 end
