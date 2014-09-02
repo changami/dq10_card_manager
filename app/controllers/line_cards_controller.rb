@@ -25,6 +25,8 @@ class LineCardsController < ApplicationController
   # POST /line_cards.json
   def create
     @line_card = LineCard.new(line_card_params)
+    @line_card.team = params[:team]
+    @line_card.card = params[:card]
 
     respond_to do |format|
       if @line_card.save
@@ -62,13 +64,13 @@ class LineCardsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_line_card
-      @line_card = LineCard.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_line_card
+    @line_card = LineCard.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def line_card_params
-      params.require(:line_card).permit(:card_id, :team_id)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def line_card_params
+    params.require(:line_card).permit(:card_id, :team_id)
+  end
 end

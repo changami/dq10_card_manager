@@ -4,7 +4,14 @@ class CardsController < ApplicationController
   # GET /cards
   # GET /cards.json
   def index
-    @cards = Card.sort_by_remaining_hour(Card.all)
+    @cards = Array.new
+    line_cards = LineCard.all
+    line_cards.each do |line_card|
+      if line_card.team_id == session[:team_id]
+        @cards << Card.find(line_card.card_id)
+      end
+    end
+    @cards = Card.sort_by_remaining_hour(@cards)
   end
 
   # GET /cards/1
@@ -28,6 +35,7 @@ class CardsController < ApplicationController
 
     respond_to do |format|
       if @card.save
+        LineCard.create(:team => current_team, :card => @card)
         format.html { redirect_to @card, notice: "#{@card.name} を登録しました" }
         format.json { render :show, status: :created, location: @card }
       else
@@ -62,13 +70,13 @@ class CardsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_card
-      @card = Card.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_card
+    @card = Card.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def card_params
-      params.require(:card).permit(:name, :remaining_hour, :own_player)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def card_params
+    params.require(:card).permit(:name, :remaining_hour, :own_player)
+  end
 end
