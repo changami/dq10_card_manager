@@ -2,6 +2,7 @@ dq10_card_manager
 ====
 
 チームやグループで、カードの枚数や残りのカード時間を共有することができます。
+[http://card.changami.net/](http://card.changami.net/)
 
 ## Description
 
