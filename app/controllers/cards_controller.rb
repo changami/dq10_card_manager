@@ -4,13 +4,7 @@ class CardsController < ApplicationController
   # GET /cards
   # GET /cards.json
   def index
-    @cards = Array.new
-    line_cards = LineCard.all
-    line_cards.each do |line_card|
-      if line_card.team_id == session[:team_id]
-        @cards << Card.find(line_card.card_id)
-      end
-    end
+    @cards = Card.where(team_id: session[:team_id])
     @cards = Card.sort_by_remaining_hour(@cards)
   end
 
@@ -32,10 +26,10 @@ class CardsController < ApplicationController
   # POST /cards.json
   def create
     @card = Card.new(card_params)
+    @card.team_id = session[:team_id]
 
     respond_to do |format|
       if @card.save
-        LineCard.create(:team => current_team, :card => @card)
         format.html { redirect_to @card, notice: "#{@card.name} を登録しました" }
         format.json { render :show, status: :created, location: @card }
       else
